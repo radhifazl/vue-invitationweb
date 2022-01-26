@@ -5,6 +5,7 @@
   <bagian-surah />
   <jadwal-event />
   <journey-timeline />
+  <gallery-photo />
 </template>
 
 <script>
@@ -14,6 +15,7 @@ import BridesName from './components/BridesName.vue'
 import JadwalEvent from './components/JadwalEvent.vue'
 import BagianSurah from './components/BagianSurah..vue'
 import JourneyTimeline from './components/JourneyTimeline.vue'
+import GalleryPhoto from './components/GalleryPhoto.vue'
 
 export default {
   name: 'App',
@@ -24,6 +26,7 @@ export default {
     JadwalEvent,
     BagianSurah,
     JourneyTimeline,
+    GalleryPhoto,
   }
 }
 </script>

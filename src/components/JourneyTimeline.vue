@@ -1,6 +1,9 @@
 <template>
   <div class="journey-timeline container-fluid wood-bg">
       <div class="journey-timeline-wrapper wrapper-z-idx pt-5 mx-auto">
+        <img src="../assets/images/woodleft1.svg" alt="Wood Flower" id="wf-left1"> <!-- wf for Wood Flower -->
+        <img src="../assets/images/woodright1.svg" alt="Wood Flower" id="wf-right1">
+        <img src="../assets/images/woodright2.svg" alt="Wood Flower" id="wf-right2">
         <div class="journey-timeline-title font-title text-center">
             <h1>Our Love Journey</h1>
         </div>
@@ -61,10 +64,56 @@ export default {
 <style>
     .journey-timeline {
         height: 1000px;
+        position: relative;
+        overflow: hidden;
     }
+
 
     .journey-timeline-wrapper {
         width: 90%;
+    }
+
+    .journey-timeline-wrapper > #wf-left1, #wf-right1, #wf-right2 {
+        position: absolute;
+    }
+
+    #wf-left1 {
+        width: 400px;
+        top: 0;
+        left: -10%;
+    }
+
+    #wf-right1, #wf-right2 {
+        right: -10%;
+        width: 350px;
+    }
+
+    #wf-right2 {
+        bottom: -60%;
+    }
+
+    #wf-right1 {
+        top: -10%;
+    }
+
+    /* === Membuat Background Bunga Responsif === */
+    @media screen and (max-width: 768px) {
+        #wf-left1, #wf-right1, #wf-right2 {
+            width: 300px;
+        }
+
+        #wf-left1 {
+            top: 20%;
+        }
+
+        #wf-right1 {
+            top: -5%;
+        }
+
+        #wf-right2 {
+            bottom: -25%;
+            right: -20%;
+        }
     }
 
     .vertical-timeline {
@@ -76,7 +125,7 @@ export default {
         content: '';
         position: absolute;
         top: 0;
-        left: 3%;
+        left: 0;
         width: 4px;
         height: 100%;
         background: var(--second-fc);
@@ -116,7 +165,7 @@ export default {
         position: relative;
     }
 
-    @media screen and (min-width: 992px) {
+    @media screen and (min-width: 1200px) {
         .journey-timeline {
             height: 900px;
         }
