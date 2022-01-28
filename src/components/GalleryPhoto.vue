@@ -8,7 +8,6 @@
           <div class="gallery-grid container mx-auto mt-5">
               <div class="photos mx-auto">
                   <div v-for="i in 7" :key="i" :class="'photo-items img-'+i">
-                    <i class="bx bx-expand"></i>
                   </div>
               </div>
           </div>
@@ -18,21 +17,27 @@
 
 <script>
 export default {
-    methods: {
-        showModal(image) {
-            const modal = document.createElement('div');
-            modal.innerHTML = `
-                <div class="modal-img">
-                    <img src="${image}" alt="Gallery Pengantin">
-                    <button class="close-btn"></button>
-                </div>
-            `;
-        }
-    }
 }
 </script>
 
 <style>
+    
+    .modal-btn {
+        width: 10rem;
+        height: 2rem;
+        font-family: var(--first-font);
+        font-size: 1.2rem;
+        background: #B3541E;
+        border: none;
+        border-radius: 15px;
+        outline: none;
+        transition: all .5s ease;
+    }
+
+    .modal-btn:hover {
+        background: #c95b1b;
+    }
+
     .photos {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
@@ -55,41 +60,7 @@ export default {
         justify-content: center;
         cursor: pointer;
         border-radius: 1rem;
-    }
-
-    .photos .photo-items::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.4);
-        opacity: 0;
-        transition: opacity .5s;
-    }
-
-    .photos .photo-items i {
-        font-size: 1.5rem;
-        position: relative;
-        z-index: 100;
-        padding: 0.5rem;
-        border: 2px solid rgba(255, 255, 255, 0.6);
-        color: #ebebeb;
-        border-radius: .4rem;
-        opacity: 0;
-        transition: .5s;
-    }
-
-    .photos .photo-items i:hover {
-        color: #fff;
-        background: rgba(172, 171, 171, 0.377);
-        border: 2px solid rgb(245, 245, 245);
-    }
-
-    .photos .photo-items:hover i,
-    .photos .photo-items:hover::before {
-        opacity: 1;
+        transition: all 0.35s ease;
     }
 
     .img-1 {
@@ -129,8 +100,8 @@ export default {
 
     @media screen and (min-width: 768px) {
         .photos .photo-items {
-            min-width: 250px;
-            min-height: 200px;
+            min-width: 230px;
+            min-height: 180px;
         }
     }
 

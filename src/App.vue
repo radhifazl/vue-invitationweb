@@ -6,6 +6,7 @@
   <jadwal-event />
   <journey-timeline />
   <gallery-photo />
+  <buku-tamu />
 </template>
 
 <script>
@@ -16,6 +17,7 @@ import JadwalEvent from './components/JadwalEvent.vue'
 import BagianSurah from './components/BagianSurah..vue'
 import JourneyTimeline from './components/JourneyTimeline.vue'
 import GalleryPhoto from './components/GalleryPhoto.vue'
+import BukuTamu from './components/BukuTamu.vue'
 
 export default {
   name: 'App',
@@ -27,6 +29,7 @@ export default {
     BagianSurah,
     JourneyTimeline,
     GalleryPhoto,
+    BukuTamu,
   }
 }
 </script>
