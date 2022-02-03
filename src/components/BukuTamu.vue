@@ -10,14 +10,14 @@
 
       <div class="buku-tamu mx-auto mt-5 p-4">
         <div class="form-wrapper">
-          <form>
+          <form @submit.prevent="postSlide" method="post" ref="absenceForm">
             <div class="box-nama mb-3">
               <input
                 type="text"
                 class="form-control"
                 name="nama"
                 id="nama"
-                placeholder="Nama anda"
+                placeholder="Nama anda" v-model="inpValues.names"
                 required
               />
             </div>
@@ -27,31 +27,29 @@
                 name="pesan"
                 class="form-control"
                 id="pesan"
-                placeholder="Berikan ucapan & doa"
+                placeholder="Berikan ucapan & doa" v-model="inpValues.messages"
                 required
                 style="resize: none"
               ></textarea>
             </div>
 
-            <div
-              class="box-buttons d-flex justify-content-between align-items-center"
-            >
+            <div class="box-buttons">
               <div class="absence-box box-hadir">
-                <input type="radio" name="absence" id="hadir" required />
+                <input type="radio" name="absence" id="hadir" v-model="inpValues.absences" value="Hadir" required />
                 <label for="hadir">Hadir</label>
               </div>
 
               <div class="absence-box box-akanhadir">
-                <input type="radio" name="absence" id="akanhadir" required />
+                <input type="radio" name="absence" id="akanhadir" v-model="inpValues.absences" value="Akan Hadir" required />
                 <label for="akanhadir">Akan hadir</label>
               </div>
 
               <div class="absence-box box-tidakhadir">
-                <input type="radio" name="absence" id="tidakhadir" required />
+                <input type="radio" name="absence" id="tidakhadir" v-model="inpValues.absences" value="Tidak Hadir" required />
                 <label for="tidakhadir">Tidak hadir</label>
               </div>
 
-              <button type="submit" name="submit" class="submit-btn">
+              <button type="submit" name="submit" class="submit-btn" @click="postToSlide">
                 Post
               </button>
             </div>
@@ -63,7 +61,7 @@
         <vueper-slides
           autoplay
           :arrows="false"
-          fixed-height="200px"
+          :fixed-height="true"
           class="no-shadow slides-wrapper"
           slide-multiple
           :visible-slides="5"
@@ -75,7 +73,7 @@
           <vueper-slide
             class="slides"
             v-for="slide in slides"
-            :key="slide.id"
+            :key="slide.nama"
             :title="slide.nama"
             :content="slide.pesan"
           />
@@ -89,6 +87,8 @@
 import { VueperSlides, VueperSlide } from "vueperslides";
 import "vueperslides/dist/vueperslides.css";
 
+import Swal from 'sweetalert2'
+
 export default {
   components: {
     VueperSlides,
@@ -97,31 +97,26 @@ export default {
   data: () => ({
     slides: [
       {
-        id: 1,
         nama: "Riska",
         pesan:
           "Selamat menempuh bahtera rumah tangga yang bahagia. Jangan berantem perkara pencet odol dari tengah sama dari ujung, ya!",
       },
       {
-        id: 2,
         nama: "Riska",
         pesan:
           "Selamat menempuh bahtera rumah tangga yang bahagia. Jangan berantem perkara pencet odol dari tengah sama dari ujung, ya!",
       },
       {
-        id: 3,
         nama: "Erlangga",
         pesan:
           "Selamat atas janji pernikahannya hari ini. Semoga dengan bersatunya kalian dalam ikatan perkawinan menjadi titik awal perjalanan hidup bersama yang lebih membahagiakan.",
       },
       {
-        id: 4,
         nama: "Mutiara",
         pesan:
           "Selamat menempuh hidup yang baru. Semoga pernikahannya menjadi awal yang membahagiakan.",
       },
       {
-        id: 5,
         nama: "Erlangga",
         pesan:
           "Selamat atas janji pernikahannya hari ini. Semoga dengan bersatunya kalian dalam ikatan perkawinan menjadi titik awal perjalanan hidup bersama yang lebih membahagiakan.",
@@ -129,10 +124,39 @@ export default {
     ],
     breakpoints: {
         600: {
-            visibleSlides: 3,
+            visibleSlides: 1,
+            bulletsOutside: true
         },
     },
+    inpValues: {
+      names: null,
+      messages: null,
+      absences: false
+    }
   }),
+  methods: {
+    postSlide() {
+      let name = this.inpValues.names;
+      let msg = this.inpValues.messages;
+      this.slides.push({
+        nama: name,
+        pesan: msg
+      })
+
+      this.successAlert();
+
+      this.$refs.absenceForm.reset();
+    },
+
+    successAlert() { 
+      Swal.fire({
+        icon: 'success',
+        title: 'Card ditambahkan!',
+        text: 'Kartu ucapan berhasil ditambahkan ke dalam slide!',
+        showCloseButton: true,
+      })
+    }
+  }
 };
 </script>
 
@@ -150,10 +174,46 @@ export default {
     .buku-tamu {
         width: 90%;
     }
+
+    .box-buttons {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-rows: auto;
+      grid-gap: 1rem;
+      grid-template-areas: 
+        "btn-1 btn-2 btn-3"
+        "btn-4 btn-4 btn-4"
+      ;
+    }
+    .box-hadir {
+      grid-area: btn-1;
+    }
+
+    .box-akanhadir {
+      grid-area: btn-2;
+      margin-left: -1.3rem;
+    }
+
+    .box-tidakhadir {
+      grid-area: btn-3;
+      margin-left: -1rem;
+    }
+
+    .submit-btn {
+      grid-area: btn-4;
+    }
 }
 
 .form-wrapper {
   width: 100%;
+}
+
+@media screen and (min-width: 768px) {
+  .box-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 }
 
 .absence-box {
@@ -208,14 +268,27 @@ export default {
   border: none;
   outline: none;
   background: var(--secondary-color);
-  padding: 0.1rem 1.5rem;
+  padding: 0.3rem 2rem;
+  transition: 0.3s ease;
+}
+
+.submit-btn:hover {
+  background: #be571b;
+  border-radius: 3px;
 }
 
 .slides {
   background: var(--secondary-color);
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .vueperslide__content-wrapper:not(.vueperslide__content-wrapper--outside-top):not(.vueperslide__content-wrapper--outside-bottom) {
   padding: 1rem;
+}
+
+.vueperslides--fixed-height { height: 200px; }
+.vueperslide__title {
+  margin-bottom: 1rem;
 }
 </style>
