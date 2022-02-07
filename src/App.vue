@@ -1,48 +1,44 @@
 <template>
-  <first-section />
-  <date-countdown />
-  <brides-name />
-  <bagian-surah />
-  <jadwal-event />
-  <journey-timeline />
-  <gallery-photo />
-  <buku-tamu />
+  <cover-page />
+  <home/>
+  <couples />
+  <event />
+  <gallery />
+  <wishes />
 </template>
 
 <script>
-import FirstSection from './components/FirstSection.vue'
-import DateCountdown from './components/DateCountdown.vue'
-import BridesName from './components/BridesName.vue'
-import JadwalEvent from './components/JadwalEvent.vue'
-import BagianSurah from './components/BagianSurah..vue'
-import JourneyTimeline from './components/JourneyTimeline.vue'
-import GalleryPhoto from './components/GalleryPhoto.vue'
-import BukuTamu from './components/BukuTamu.vue'
+import CoverPage from './components/CoverPage.vue'
+import Couples from './views/Couples.vue'
+import Event from './views/Event.vue'
+import Gallery from './views/Gallery.vue'
+import Home from './views/Home.vue'
+import Wishes from './views/Wishes.vue'
 
 export default {
   name: 'App',
   components: {
-    FirstSection,
-    DateCountdown,
-    BridesName,
-    JadwalEvent,
-    BagianSurah,
-    JourneyTimeline,
-    GalleryPhoto,
-    BukuTamu,
+    CoverPage,
+    Home,
+    Couples,
+    Event,
+    Gallery,
+    Wishes,
   }
 }
 </script>
 
 <style>
   /* === FONTS === */
-  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;600;700&family=Rochester&display=swap');
-
+  @import url('https://fonts.googleapis.com/css2?family=Cabin:wght@400;600&family=Montserrat:wght@200;400;600;700&family=Roboto:wght@100;300;400;500;700&family=Rochester&family=Sarabun&display=swap');
   /* === Variables === */
   :root {
       /* === Font === */
-      --first-font: 'Rochester', cursive;
+      --first-font: 'Rochester', sans-serif;
       --second-font: 'Montserrat', sans-serif;
+      --third-font: 'Roboto', sans-serif;
+      --cabin: 'Cabin', sans-serif;
+      --footer-font: 'Sarabun', sans-serif;
 
       /* === Colors === */
       --primary-color: #89492B;
